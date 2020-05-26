@@ -1,3 +1,4 @@
+require('./bootstrap')
 import Vue from 'vue'
 import BaseTemplate from './layouts/BaseTemplate'
 import router from './routes'
