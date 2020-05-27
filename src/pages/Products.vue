@@ -19,15 +19,17 @@
 
         <div class="row my-4">
 
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-lg-4 col-md-6 mb-4" v-for="(product, index) in company.products.data" :key="index">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/pizza.png" alt=""></a>
+              <a href="#">
+                <img class="card-img-top" :src="product.image" alt="">
+              </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Pizza</a>
+                  <a href="#">{{ product.title }}</a>
                 </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <h5>R$ {{ product.price }}</h5>
+                <p class="card-text">{{ product.description }}</p>
               </div>
               <div class="card-footer card-footer-custom">
                 <router-link :to="{name: 'cart'}">
@@ -36,86 +38,7 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="disabled card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/acai.png" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Açai na Tijela</a>
-                </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer card-footer-custom">
-                <a href="carrinho.html">Adicionar no Carrinho <i class="fas fa-cart-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/japonesa.png" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item Three</a>
-                </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer card-footer-custom">
-                <a href="carrinho.html">Adicionar no Carrinho <i class="fas fa-cart-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/lanches.png" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Sanduíche</a>
-                </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer card-footer-custom">
-                <a href="carrinho.html">Adicionar no Carrinho <i class="fas fa-cart-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/pizza.png" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Pizza Vegana</a>
-                </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-              </div>
-              <div class="card-footer card-footer-custom">
-                <a href="carrinho.html">Adicionar no Carrinho <i class="fas fa-cart-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="imgs/acai.png" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Açai Bomba</a>
-                </h4>
-                <h5>R$ 12,99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer card-footer-custom">
-                <a href="carrinho.html">Adicionar no Carrinho <i class="fas fa-cart-plus"></i></a>
-              </div>
-            </div>
-          </div>
+          
 
         </div>
         <!-- /.row -->
@@ -140,6 +63,12 @@ export default {
 
     this.getCategoriesByCompany(this.company.uuid)
           .catch(response => this.$vToastify.error('Falha ao Carregar as Categorias', 'Erro'))
+
+    this.getProductsByCompany(this.company.uuid)
+          .catch(response => this.$vToastify.error('Falha ao Carregar os Produtos', 'Erro'))
+
+        console.log(this.company.products);
+        
   },
 
   computed: {
@@ -151,7 +80,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'getCategoriesByCompany'
+      'getCategoriesByCompany',
+      'getProductsByCompany'
     ])
   },
 }

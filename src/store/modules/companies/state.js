@@ -5,6 +5,7 @@ const state = {
     
     companySelected: {
         name: '',
+        products: []
     },
 
     categoriesCompanySelected: {
