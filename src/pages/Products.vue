@@ -7,7 +7,8 @@
         <div class="list-group">
           <a href="#"
             class="list-group-item"
-            v-for="(category, index) in categories.data" :key="index">
+            v-for="(category, index) in categories.data" :key="index"
+            @click.prevent="filterByCategory(category)">
             {{ category.name }}
           </a>
         </div>
@@ -18,6 +19,10 @@
       <div class="col-lg-9">
 
         <div class="row my-4">
+
+          <div v-if="company.products.data.length === 0">
+            Nenhum produto
+          </div>
 
           <div class="col-lg-4 col-md-6 mb-4" v-for="(product, index) in company.products.data" :key="index">
             <div class="card h-100">
@@ -64,11 +69,9 @@ export default {
     this.getCategoriesByCompany(this.company.uuid)
           .catch(response => this.$vToastify.error('Falha ao Carregar as Categorias', 'Erro'))
 
-    this.getProductsByCompany(this.company.uuid)
-          .catch(response => this.$vToastify.error('Falha ao Carregar os Produtos', 'Erro'))
-
-        console.log(this.company.products);
-        
+    //this.getProductsByCompany(this.company.uuid)
+          //.catch(response => this.$vToastify.error('Falha ao Carregar os Produtos', 'Erro'))        
+    this.loadProducts()
   },
 
   computed: {
@@ -78,11 +81,41 @@ export default {
     }),
   },
 
+  data() {
+    return {
+      filters: {
+        category: ''
+      }
+    }
+  },
+
   methods: {
     ...mapActions([
       'getCategoriesByCompany',
       'getProductsByCompany'
-    ])
+    ]),
+
+    loadProducts () {
+
+      const params = {
+        token_company: this.company.uuid,
+      }
+
+      if (this.filters.category) {
+        params.categories = [
+          this.filters.category
+        ]
+      }
+
+      this.getProductsByCompany(params)
+          .catch(response => this.$vToastify.error('Falha ao Carregar os Produtos', 'Erro'))        
+    },
+
+    filterByCategory (category) {
+      this.filters.category = category.identify
+
+      this.loadProducts()
+    }
   },
 }
 </script>

@@ -4,7 +4,7 @@ export default {
     },
 
     SET_COMPANY_SELECTED (state, company) {
-        state.companySelected = company
+        state.companySelected = Object.assign(state.companySelected, company)
     },
 
     SET_CATEGORIES_COMPANY (state, categories) {

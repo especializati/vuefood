@@ -22,11 +22,12 @@ export default {
                         .finally(() => commit('SET_PRELOADER', false))
     },
 
-    getProductsByCompany ({ commit }, token_company) {
+    getProductsByCompany ({ commit }, params) {
         commit('SET_PRELOADER', true)
         commit('SET_TEXT_PRELOADER', 'Carregando os produtos')
+        commit('SET_PRODUCTS_COMPANY', {data: []})
 
-        return axios.get(`${API_VERSION}/products`, { params: { token_company } })
+        return axios.get(`${API_VERSION}/products`, { params })
                         .then(response => commit('SET_PRODUCTS_COMPANY', response.data))
                         .finally(() => commit('SET_PRELOADER', false))
     }
