@@ -1,5 +1,7 @@
 <template>
     <div>
+        <preloader-component></preloader-component>
+        
         <header-component/>        
 
         <!-- Page Content -->
