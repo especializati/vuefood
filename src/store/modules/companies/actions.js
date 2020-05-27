@@ -9,7 +9,7 @@ export default {
         commit('SET_TEXT_PRELOADER', 'Carregando as empresas')
 
         return axios.get(`${API_VERSION}/${RESOURCE}`)
-                        .then(response => commit('SET_COMPANY', response.data))
+                        .then(response => commit('SET_COMPANIES', response.data))
                         .finally(() => commit('SET_PRELOADER', false))
     }
 }

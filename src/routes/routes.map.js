@@ -16,9 +16,10 @@ const routes = [
             },
         
             {
-                path: '/loja',
+                path: '/loja/:companyFlag',
                 component: Products,
-                name: 'products'
+                name: 'products',
+                props: true
             },
         
             {

@@ -3,7 +3,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4 title-tenant">Nome do Tenant</h1>
+        <h1 class="my-4 title-tenant">{{ company.name }}</h1>
         <div class="list-group">
           <a href="#" class="list-group-item active">Categoria 1</a>
           <a href="#" class="list-group-item">Categoria 2</a>
@@ -124,3 +124,23 @@
     </div>
     <!-- /.row -->
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  props: ['companyFlag'],
+
+  created() {
+    if (this.company.name === '') {
+      return this.$router.push({name: 'home'})
+    }
+  },
+
+  computed: {
+    ...mapState({
+      company: state => state.companies.companySelected,
+    }),
+  },
+}
+</script>
