@@ -17,3 +17,5 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+store.dispatch('getMe')
