@@ -99,7 +99,7 @@ export default {
             .then(response => {
               this.$vToastify.success('Autenticação realizada com sucesso', 'Parabéns')
 
-              this.$router.push({name: 'home'})
+              this.$router.push({name: 'my.orders'})
             })
             .catch(error => {
               const errorResponse = error.response
@@ -114,7 +114,7 @@ export default {
                 return;
               }
 
-              this.$vToastify.error('Falha ao Registrar', 'Erro')
+              this.$vToastify.error('Falha ao Autenticar', 'Erro')
             })
             .finally(() => this.loading = false)
     },

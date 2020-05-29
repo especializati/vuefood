@@ -11,7 +11,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Pedido: <strong>{{ order.identify }}</strong></h5>
                         <p class="card-text">Data: {{ order.date }}</p>
-                        <a href="detalhes-pedido.html" class="btn btn-danger">Detalhes</a>
+                        <router-link :to="{name: 'order.detail', params: {identify: order.identify}}" class="btn btn-danger">
+                            Detalhes
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -25,13 +27,18 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
     created() {
+        if (this.me.name === '') {
+            return this.$router.push({name: 'home'})
+        }
+
         this.getMyOrders()
                 .catch(_=> this.$vToastify.error('Falha ao buscar os pedidos', 'Erro'))
     },
 
     computed: {
         ...mapState({
-            myOrders: state => state.orders.myOrders
+            myOrders: state => state.orders.myOrders,
+            me: state => state.auth.me
         }),
     },
 
