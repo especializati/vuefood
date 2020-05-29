@@ -41,6 +41,17 @@ const actions = {
 
         return axios.get(`${API_VERSION}/orders/${identify}`)
                         .finally(() => commit('SET_PRELOADER', false))
+    },
+
+    evaluationOrder ({commit}, params) {
+        const token = localStorage.getItem(TOKEN_NAME)
+        if (!token) Promise.reject()
+
+        return axios.post(`auth/${API_VERSION}/orders/${params.identify}/evaluations`, params, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     }
 
 }
