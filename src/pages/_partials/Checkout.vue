@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class=" text-light" style="margin: 5px">
-            Preço Total: <b>R$ {{ totalCart }}</b>
+            Preço Total: <b>R$ {{ totalCart | formatprice }}</b>
         </div>
         <a href="#" class="btn btn-success" @click.prevent="openModalCheckout">Finalizar</a>
 
@@ -12,7 +12,7 @@
             <div class="px-md-5 my-4" v-else>
                 <div class="col-12" v-if="me.name !== ''">
                     <p><strong>Total de produtos:</strong> {{ products.length }}</p>
-                    <p><strong>Preço total:</strong> R$ {{ totalCart }}</p>
+                    <p><strong>Preço total:</strong> R$ {{ totalCart | formatprice }}</p>
                     <p v-if="company.table.identify">
                         <strong>Mesa:</strong> {{ company.table.name }}
                     </p>
@@ -24,7 +24,7 @@
                 <div v-else class="row">
                     <div class="col-6">
                         <p><strong>Total de produtos:</strong> {{ products.length }}</p>
-                        <p><strong>Preço total:</strong> R$ {{ totalCart }}</p>
+                        <p><strong>Preço total:</strong> R$ {{ totalCart | formatprice }}</p>
                         <p v-if="company.table.identify">
                             <strong>Mesa:</strong> {{ company.table.name }}
                         </p>
