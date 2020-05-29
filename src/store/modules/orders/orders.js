@@ -33,6 +33,14 @@ const actions = {
         })
         .then(response => commit('SET_ORDERS', response.data))
         .finally(() => commit('SET_PRELOADER', false))
+    },
+
+    getOrderByIdentify ({commit}, identify) {
+        commit('SET_PRELOADER', true)
+        commit('SET_TEXT_PRELOADER', 'Carregando os detalhes do pedido')
+
+        return axios.get(`${API_VERSION}/orders/${identify}`)
+                        .finally(() => commit('SET_PRELOADER', false))
     }
 
 }
