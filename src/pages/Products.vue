@@ -4,6 +4,10 @@
       <div class="col-lg-3">
 
         <h1 class="my-4 title-tenant">{{ company.name }}</h1>
+        <h2 v-if="company.table.identify">
+          Mesa: {{ company.table.name }}
+          (<a href="#" @click.prevent="removeTableCompany">x</a>)
+        </h2>
         <div class="list-group">
           <a href="#"
             :class="['list-group-item', categoryInFilter('')]"
@@ -102,7 +106,8 @@ export default {
     ]),
 
     ...mapMutations({
-      addProdCart: 'ADD_PRODUCT_CART'
+      addProdCart: 'ADD_PRODUCT_CART',
+      removeTableCompany: 'REMOVE_TABLE_COMPANY',
     }),
 
     loadProducts () {

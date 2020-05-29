@@ -5,12 +5,20 @@ import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
 import MyOrders from '@/pages/Auth/MyOrders';
 import DetailOrder from '@/pages/DetailOrder';
+import LoadTableCompany from '@/pages/LoadTableCompany';
 
 const routes = [
     {
         path: '/',
         component: () => import('@/layouts/DefaultTemplate'),
         children: [
+            {
+                path: '/:token_company/:token_table',
+                component: LoadTableCompany,
+                name: 'load.table.company',
+                props: true
+            },
+
             {
                 path: '/pedido/:identify',
                 component: DetailOrder,

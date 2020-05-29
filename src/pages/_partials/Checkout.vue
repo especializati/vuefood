@@ -13,6 +13,9 @@
                 <div class="col-12" v-if="me.name !== ''">
                     <p><strong>Total de produtos:</strong> {{ products.length }}</p>
                     <p><strong>Preço total:</strong> R$ {{ totalCart }}</p>
+                    <p v-if="company.table.identify">
+                        <strong>Mesa:</strong> {{ company.table.name }}
+                    </p>
                     <div class="form-group">
                         <textarea name="comment" v-model="comment" class="form-control" cols="30" rows="2" placeholder="Comentário (Opicional)"></textarea>
                     </div>
@@ -22,6 +25,9 @@
                     <div class="col-6">
                         <p><strong>Total de produtos:</strong> {{ products.length }}</p>
                         <p><strong>Preço total:</strong> R$ {{ totalCart }}</p>
+                        <p v-if="company.table.identify">
+                            <strong>Mesa:</strong> {{ company.table.name }}
+                        </p>
                         <div class="form-group">
                             <textarea name="comment" v-model="comment" class="form-control" cols="30" rows="2" placeholder="Comentário (Opicional)"></textarea>
                         </div>
@@ -85,6 +91,11 @@ export default {
                 products: [
                     ...this.products
                 ]
+            }
+
+            // set table order
+            if (this.company.table.identify) {
+                params.table = this.company.table.identify
             }
             
             this.$store.dispatch(action, params)
