@@ -7,6 +7,24 @@ export default {
         state.companySelected = Object.assign(state.companySelected, company)
     },
 
+    REMOVE_COMPANY_SELECTED (state) {
+        state.companySelected = {
+            name: '',
+            products: {
+                data: []
+            },
+            table: {
+                identify: '',
+                description: '',
+                name: ''
+            }
+        },
+    
+        state.categoriesCompanySelected = {
+            data: []
+        }
+    },
+
     SET_CATEGORIES_COMPANY (state, categories) {
         state.categoriesCompanySelected = categories
     },
