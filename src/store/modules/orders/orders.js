@@ -52,7 +52,38 @@ const actions = {
                 'Authorization': `Bearer ${token}`
             }
         })
-    }
+    },
+
+    createOrder ({commit}, params) {
+        return new Promise((resolve, reject) => {
+            axios.post(`${API_VERSION}/orders`, params)
+                        .then(response => {
+                            commit('CLEAR_CART')
+
+                            resolve(response.data.data)
+                        })
+                        .catch(response => reject(response.error))
+        })
+    },
+
+    createOrderAutheticated ({commit}, params) {
+        return new Promise((resolve, reject) => {
+            const token = localStorage.getItem(TOKEN_NAME)
+            if (!token) reject()
+
+            axios.post(`auth/${API_VERSION}/orders`, params, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                commit('CLEAR_CART')
+
+                resolve(response.data.data)
+            })
+            .catch(response => reject(response.error))
+        })
+    },
 
 }
 
