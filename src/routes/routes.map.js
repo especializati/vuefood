@@ -3,12 +3,19 @@ import Products from '@/pages/Products';
 import Cart from '@/pages/Cart';
 import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
+import MyOrders from '@/pages/Auth/MyOrders';
 
 const routes = [
     {
         path: '/',
         component: () => import('@/layouts/DefaultTemplate'),
         children: [
+            {
+                path: '/meus-pedidos',
+                component: MyOrders,
+                name: 'my.orders'
+            },
+
             {
                 path: '/carrinho',
                 component: Cart,
