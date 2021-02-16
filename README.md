@@ -1,4 +1,6 @@
-# vuefood
+# VueFood - O Curso
+
+[Curso VueFood - SPA](https://academy.especializati.com.br/curso/vue-js-vuefood
 
 ## Project setup
 ```
